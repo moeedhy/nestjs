@@ -25,6 +25,3 @@ export function ACL<T>(
   });
 }
 
-// export const UseACL = (options: AclOptions) => {
-//   applyDecorators(ACL(options), UseGuards(AclGuard));
-// };

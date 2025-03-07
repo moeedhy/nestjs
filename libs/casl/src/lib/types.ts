@@ -22,6 +22,12 @@ export type AbilityFactoryBuilder<
 > = AbilityBuilder<MongoAbility<[TAction, TSubject], MongoQuery>>;
 
 export type AclModuleOptions = {
-  hookProviders: Type<SubjectHook<any, any>>[];
+  hookProviders: Type<SubjectHook>[];
   abilityFactory: Type<AbilityFactory>;
 };
+
+
+
+export type AuthPayload = {
+  user?: {id: string};
+}

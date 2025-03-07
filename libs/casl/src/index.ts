@@ -1,4 +1,3 @@
-export * from './lib/acl.service';
 export * from './lib/acl.module';
 export * from './lib/guards';
 export * from './lib/interfaces';
