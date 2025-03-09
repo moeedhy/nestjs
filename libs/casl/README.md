@@ -41,10 +41,14 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 interface AuthPayload {
   user?: { id: string };
 }
-
+ class Post {
+  id: string;
+  authorId: string;
+}
+type Subjects = InferSubjects<typeof Post>;
 @Injectable()
-export class MyAbilityFactory extends AbilityFactory<AclActions, string, AuthPayload> {
-  async defineRules(builder: AbilityFactoryBuilder<string, AclActions>, auth?: AuthPayload) {
+export class MyAbilityFactory extends AbilityFactory<AclActions, Post, AuthPayload> {
+  async defineRules(builder: AbilityFactoryBuilder<Post, AclActions>, auth?: AuthPayload) {
     const { can } = builder;
 
     if (auth?.user?.id) {
@@ -114,7 +118,7 @@ import { PostHook } from './post.hook';
 @UseGuards(AclGuard)
 export class PostsController {
   @Get()
-  @ACL('read', 'Post') // Can user read 'Post'?
+  @ACL('read', Post) // Can user read 'Post'?
   findAll() {
     return { message: 'List of posts' };
   }
@@ -272,7 +276,7 @@ Use these in your `defineRules` or `@ACL` decorator, or define custom actions as
 
 ## Examples
 
-For complete examples, visit the [example directory](https://github.com/moeedchughtai/nest-casl/tree/main/examples) in the repository (update this link after publishing).
+For complete examples, visit the [example directory](https://github.com/moeedhy/nestjs/) in the repository (update this link after publishing).
 
 ## Contributing
 
@@ -281,7 +285,7 @@ Contributions are welcome! Please:
 2. Create a feature branch.
 3. Submit a pull request with a clear description.
 
-Report issues or suggest features on the [GitHub Issues page](https://github.com/moeedchughtai/nest-casl/issues).
+Report issues or suggest features on the [GitHub Issues page](https://github.com/moeedhy/nestjs/issues).
 
 ## License
 
