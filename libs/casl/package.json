@@ -1,6 +1,14 @@
 {
   "name": "@moeed/nest-casl",
   "version": "0.0.1",
+  "description": "NestJS CASL integration",
+  "license": "MIT",
+  "author": "Moeed Heidary Goudarzy",
+  "repository": {
+    "url": "https://github.com/moeedhy/nestjs",
+    "type": "git",
+    "directory": "libs/casl"
+  },
   "type": "commonjs",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
