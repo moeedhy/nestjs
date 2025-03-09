@@ -9,6 +9,7 @@ on:
 permissions:
   actions: read
   contents: read
+  id-token: write # needed for provenance data generation
 
 jobs:
   main:
@@ -27,13 +28,20 @@ jobs:
       # Cache node_modules
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 'lts/*'
           cache: 'yarn'
+
 
       - name: Install dependencies
         run: yarn install --immutable
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
-      - run: npx nx affected -t nx-release-publish
+      - name: Print Environment Info
+        run: npx nx report
+        shell: bash
+
+      - name: Publish packages
+        run: npx nx release publish
+        shell: bash
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
