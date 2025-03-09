@@ -32,12 +32,6 @@ jobs:
           cache: 'yarn'
 
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Set Correct Yarn Version
-        run: corepack prepare yarn@4.7.0 --activate
-
       - name: Install dependencies
         run: yarn install --immutable
 
